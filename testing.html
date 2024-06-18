@@ -60,7 +60,7 @@
                     password: formData.get('password')
                 };
 
-                const response = await fetch('https://hitmanrebornict.github.io/phishing-simulation/submit-form.js', {
+                const response = await fetch('/submit-form', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
